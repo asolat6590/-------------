@@ -1,150 +1,124 @@
-/* Стили формы транзакции */
 .form {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: 16px;
 }
 
-/* Группа полей */
-.fieldGroup {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-}
-
-.label {
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-  color: var(--color-text);
-}
-
-/* Переключатель типа операции */
+/* Переключатель типа */
 .typeSelector {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-sm);
+  display: flex;
+  gap: 8px; /* Исправляет "слипание" кнопок переключателя */
+  background-color: #f3f4f6;
+  padding: 4px;
+  border-radius: 8px;
 }
 
 .typeButton {
-  padding: var(--spacing-md);
-  border-radius: var(--radius-md);
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
   font-weight: 600;
-  transition: all 0.2s ease;
-  border: 2px solid var(--color-border);
-  background-color: var(--color-surface);
-  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.typeButton:hover {
-  border-color: var(--color-primary);
-  background-color: var(--color-primary-light);
+.typeButtonActiveIncome {
+  background-color: #10b981;
+  color: white;
 }
 
-.typeButtonIncomeActive {
-  border-color: var(--color-income);
-  background-color: var(--color-income-light);
-  color: var(--color-income);
+.typeButtonActiveExpense {
+  background-color: #ef4444;
+  color: white;
 }
 
-.typeButtonExpenseActive {
-  border-color: var(--color-expense);
-  background-color: var(--color-expense-light);
-  color: var(--color-expense);
+.typeButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* Поля ввода */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
 .input,
 .select,
 .textarea {
-  padding: var(--spacing-md);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background-color: var(--color-surface);
-  color: var(--color-text);
-  font-size: var(--font-size-md);
-  transition: all 0.2s ease;
-}
-
-.input:hover,
-.select:hover,
-.textarea:hover {
-  border-color: var(--color-primary);
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
 }
 
 .input:focus,
 .select:focus,
 .textarea:focus {
   outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px var(--color-primary-light);
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
 
-.textarea {
-  resize: vertical;
-  min-height: 80px;
-  font-family: inherit;
+.input:disabled,
+.select:disabled,
+.textarea:disabled {
+  background-color: #f9fafb;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
-/* Grid для полей */
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-md);
-}
-
-/* Кнопки действий */
-.actions {
+/* Блок кнопок */
+.buttons {
   display: flex;
-  gap: var(--spacing-md);
   justify-content: flex-end;
-  margin-top: var(--spacing-md);
+  gap: 12px; /* Исправляет "слипание" кнопок Отмена/Добавить */
+  margin-top: 8px;
 }
 
-.button {
-  padding: var(--spacing-md) var(--spacing-xl);
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  transition: all 0.2s ease;
+.cancelButton {
+  padding: 10px 20px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: white;
+  color: #374151;
+  font-weight: 500;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-.buttonPrimary {
-  background-color: var(--color-primary);
+.cancelButton:hover:not(:disabled) {
+  background-color: #f3f4f6;
+}
+
+.submitButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: #3b82f6;
   color: white;
-  box-shadow: var(--shadow-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-.buttonPrimary:hover {
-  background-color: var(--color-primary-hover);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
+.submitButton:hover:not(:disabled) {
+  background-color: #2563eb;
 }
 
-.buttonPrimary:active {
-  transform: translateY(0);
-}
-
-.buttonSecondary {
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  border: 1px solid var(--color-border);
-}
-
-.buttonSecondary:hover {
-  background-color: var(--color-border);
-}
-
-/* Адаптивность для мобильных устройств */
-@media (max-width: 640px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  .actions {
-    flex-direction: column-reverse;
-  }
-
-  .button {
-    width: 100%;
-  }
+/* Стили для заблокированных кнопок */
+.cancelButton:disabled,
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
